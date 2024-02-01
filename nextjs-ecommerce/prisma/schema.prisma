@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  description String
+  imageUrl    String
+  name        String
+  price       Int
+  createdAt   DateTime @default(now())
+  uptadedAt   DateTime @updatedAt
+
+  @@map("products")//this model is connected to this collection and this way the collaction can have different names
+}
+
+//for the modify a product keyboad shortcut which on Windows is shift alt F
+//yarn prisma init prisma şemasını projeye ekler
+//yarn prisma db pull veritabanındaki şemayı prisma şemasına çeker
+//yarn prisma db push prisma şemasındaki şemayı veritabanına çeker
+//yarn prisma generate prisma şemasındaki şemaya göre prisma client oluşturur ve bu client ile veritabanı ile iletişim kurulur bu sayede veritabanı ile iletişim kurmak için gerekli olan kodlar oluşturulur.
