@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/db/prisma";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Add Product - Flowmazon",
@@ -24,7 +24,7 @@ async function addProduct(formData: FormData) {
     data: { name, description, imageUrl, price },
   });
 
-  redirect("/");//kullanıcıyı anasayfaya yönlendirir.Bu kod, addProduct fonksiyonunun sonunda çalışır.
+  redirect("/");
 }
 
 export default function AddProductPage() {
