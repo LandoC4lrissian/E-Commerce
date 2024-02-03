@@ -14,6 +14,8 @@ export default function FormSubmitButton(
     {children,className} : FormSubmitButtonProps
 ) {
     return(
-        <button>{children}</button>
+        <button
+        className={`btn btn-primary ${className}`}
+        >{children}</button>
     )
 }
