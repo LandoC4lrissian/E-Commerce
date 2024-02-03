@@ -24,7 +24,7 @@ async function addProduct(formData: FormData) {
     data: { name, description, imageUrl, price },
   });
 
-  redirect("/");
+  redirect("/");// redirect fonksiyonu, addProduct fonksiyonu çalıştığında, kullanıcıyı / adresine yönlendirir.
 }
 
 export default function AddProductPage() {
