@@ -1,5 +1,6 @@
 import {prisma} from "@/lib/db/prisma";
 import Image from "next/image";
+import ProductCard from "./components/ProductCard";
 
 export default async function Home() {
   const products = await prisma.product.findMany({
@@ -8,7 +9,9 @@ export default async function Home() {
 
   return (
   
-  <div></div>
+  <div>
+    <ProductCard product={products[0]} />
+  </div>
   
   );
 }
