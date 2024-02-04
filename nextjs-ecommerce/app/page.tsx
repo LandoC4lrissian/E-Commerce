@@ -12,6 +12,6 @@ export default async function Home() {
   <div>
     <ProductCard product={products[0]} />
   </div>
-  
+  // Bu sayfa, veritabanından alınan ilk ürünü gösterir.
   );
 }

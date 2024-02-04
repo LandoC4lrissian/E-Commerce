@@ -11,7 +11,7 @@ async function addProduct(formData: FormData) {
 
   const name = formData.get("name") as string;
   const description = formData.get("description") as string;
-  const imageUrl = formData.get("imageUrl") as string;
+  const imageUrl = formData.get("imageUrl")?.toString();
   const price = Number(formData.get("price") || 0);
   // || 0 yaparak eğer price değeri null veya undefined gelirse 0 olarak atar.
 

@@ -7,4 +7,5 @@ interface PriceTagProps {
 
 export default function PriceTag({price, className} : PriceTagProps){
     return <span className={`badge ${className}`}>{formatPrice(price)}</span>
+    // formatPrice fonksiyonu, price prop'unu para birimi biçiminde biçimlendirmek için kullanılır.
 }
