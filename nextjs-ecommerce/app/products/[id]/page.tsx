@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/db/prisma";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import PriceTag from "@/components/PriceTag";
+import PriceTag from "@/app/components/PriceTag";
 
 
 interface ProductPageProps {
