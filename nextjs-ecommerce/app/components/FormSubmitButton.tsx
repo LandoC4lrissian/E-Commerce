@@ -1,6 +1,7 @@
 "use client";
 
 import { ComponentProps} from "react";
+import { experimental_useFormStatus as useFormStatus } from "react-dom";
 
 type FormSubmitButtonProps = {
     children: React.ReactNode,
@@ -13,9 +14,21 @@ type FormSubmitButtonProps = {
 export default function FormSubmitButton(
     {children,className} : FormSubmitButtonProps
 ) {
+    const {pending} = useFormStatus();
+
     return(
         <button
         className={`btn btn-primary ${className}`}
-        >{children}</button>
+        type="submit" /*type özelliği, düğmenin türünü belirtir. Bu durumda, submit değeri kullanılır.
+        Bu, düğmeye tıklandığında formdaki verilerin sunucuya gönderileceği anlamına gelir.*/
+        disabled={pending}/*disabled özelliği, düğmenin devre dışı olup olmadığını belirler. pending değişkeninin değeri true ise düğme devre dışı bırakılır.
+        Bu, form gönderilirken kullanıcının birden fazla kez tıklamasını önler.*/
+        /*pending değişkeni, useFormStatus kancasından alınır.
+        Bu değişken, form gönderme işleminin durumunu gösterir. true ise form gönderiliyor, false ise form gönderilmiyor demektir.*/
+        >
+            {pending && <span className="loading loading-spinner" />}
+            {/*pending değişkeni true ise, yani form gönderiliyorsa, loading sınıfı ve loading-spinner sınıfı içeren bir span elementi gösterilir.*/}
+            {children}</button>
+            //children prop'u, FormSubmitButton bileşeninin içeriğini temsil eder. Bu durumda, düğmenin metni.
     )
 }
