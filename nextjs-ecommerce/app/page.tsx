@@ -6,7 +6,11 @@ import Link from "next/link";
 export default async function Home() {
   const products = await prisma.product.findMany({
     orderBy: { id: "desc" },
-  });
+  }); /*({ ... }): Verilerin nasıl alınacağını belirlemek için seçenekler içeren bir nesne.
+  product.findMany: "product" adlı veritabanı tablosundan birden fazla kayıt almak için özel bir Prisma Client yöntemidir.
+  orderBy: findMany seçenek nesnesi içinde sonuçların sıralama düzenini kontrol etmek için bir seçenek.
+  id: "desc": Prisma Client'a ürünleri "id" özelliğine göre azalan sırada sıralama talimatı verir. Bu, en yüksek kimlikli ürünlerin önce listeleneceği anlamına gelir.
+  */
 
   return (
     <div>
