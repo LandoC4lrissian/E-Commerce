@@ -8,15 +8,36 @@ datasource db {
 }
 
 model Product {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
   description String
   imageUrl    String
   name        String
   price       Int
-  createdAt   DateTime @default(now())
-  uptadedAt   DateTime @updatedAt
+  createdAt   DateTime   @default(now())
+  uptadedAt   DateTime   @updatedAt
+  CartItem    CartItem[]
 
-  @@map("products")//this model is connected to this collection and this way the collaction can have different names
+  @@map("products") //this model is connected to this collection and this way the collaction can have different names
+}
+
+model Cart {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@map("carts")
+}
+
+model CartItem {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  productId String  @db.ObjectId
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int
+  cardId    String  @db.ObjectId
+  cart      Cart    @relation(fields: [cardId], references: [id])
+
+  @@map("cartItems")
 }
 
 //for the modify a product keyboad shortcut which on Windows is shift alt F
