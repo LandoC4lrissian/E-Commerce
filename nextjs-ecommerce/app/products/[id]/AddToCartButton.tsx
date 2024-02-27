@@ -1,13 +1,27 @@
 "use client";
 
+import { useState, useTransition } from "react";
+import { incrementProductQuantity } from "./actions";
+
 interface AddToCartBottonProps {
   productId: string;
+  incremetProductQuantity: (productId: string) => Promise<void>;
 }
 
 export default function AddToCartButton({ productId }: AddToCartBottonProps) {
+  const [isPending, startTransition] = useTransition();
+  const [success, setSuccess] = useState(false);
+
   return (
     <div className="flex items-center gap-2">
-      <button className="btn btn-primary" onClick={() => {}}>
+      <button className="btn btn-primary" onClick={() => {
+        setSuccess(false);
+        startTransition(async () => {
+            await incrementProductQuantity(productId);
+            setSuccess(true);
+        })
+      }}
+      >
         Add to cart
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -24,6 +38,8 @@ export default function AddToCartButton({ productId }: AddToCartBottonProps) {
           />
         </svg>
       </button>
+      {isPending && <span className="loading loading-spinner loading-md"/>}
+      {!isPending && success && ( <span className="text-success" > Added to Cart </span>)}
     </div>
   );
 }
