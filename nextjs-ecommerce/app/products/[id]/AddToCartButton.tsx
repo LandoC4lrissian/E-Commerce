@@ -7,8 +7,10 @@ interface AddToCartBottonProps {
   productId: string;
   incremetProductQuantity: (productId: string) => Promise<void>;
 }
+// AddToCartButtonProps adında bir arayüz (interface) tanımlıyoruz. Bu, AddToCartButton bileşenine geçirilecek olan özellikleri belirtir.
 
 export default function AddToCartButton({ productId }: AddToCartBottonProps) {
+  //AddToCartButton adında bir bileşen tanımlıyoruz. Bu bileşen, productId adında bir özellik alır ve AddToCartBottonProps arayüzüne uyar. 
   const [isPending, startTransition] = useTransition();
   const [success, setSuccess] = useState(false);
 
@@ -20,7 +22,7 @@ export default function AddToCartButton({ productId }: AddToCartBottonProps) {
             await incrementProductQuantity(productId);
             setSuccess(true);
         })
-      }}
+      }} //incrementProductQuantity fonksiyonunu çağırarak, verilen productId ile ilgili ürünün miktarını artırmak için sunucuya bir istek gönderiyoruz.
       >
         Add to cart
         <svg
